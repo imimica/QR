@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">QR</string>
+    <string name="title_home">Home</string>
+    <string name="title_history">History</string>
+
+    <string-array name="write_types">
+        <item>String</item>
+        <item>Uri</item>
+    </string-array>
+</resources>
