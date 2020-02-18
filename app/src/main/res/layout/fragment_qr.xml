@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QRWriteActivity">
+    tools:context=".QRActivity">
 
     <TextView
         android:id="@+id/txtTagContent"
@@ -14,7 +14,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="66dp"
         android:layout_marginEnd="50dp"
-        android:text="Scan"
+        android:text="Scan with the button"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

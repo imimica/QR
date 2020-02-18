@@ -53,11 +53,10 @@ public class HistoryFragment extends Fragment implements HistoryAdapter.RowClick
 
     @Override
     public void onRowClick(int pos) {
-        String [] message = historyArray.get(pos).split(" ");
-        String url = message[1];
+        String url = historyArray.get(pos);
         if(url.startsWith("www.") || url.startsWith("http")) {
             if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                url = "http://" + message[1];
+                url = "http://" + historyArray.get(pos);
             }
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(browserIntent);

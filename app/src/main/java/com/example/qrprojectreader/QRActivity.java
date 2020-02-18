@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Camera;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class QRWriteActivity extends AppCompatActivity {
+public class QRActivity extends AppCompatActivity {
 
     private static final String HISTORY = "History";
 
@@ -56,7 +55,7 @@ public class QRWriteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qr_write);
+        setContentView(R.layout.activity_qr);
         checkAndRequestPermissions();
         setupNavigationBar();
         if(getIntent().hasExtra("result")) {
@@ -121,13 +120,13 @@ public class QRWriteActivity extends AppCompatActivity {
         return prefs;
     }
 
-    public void addDataInSet(String content) {
+    public void addData(String content) {
         historySet = getHistorySet();
         historySet.add(content);
-        writePrefs();
+        writeToPrefs();
     }
 
-    private void writePrefs() {
+    private void writeToPrefs() {
         SharedPreferences.Editor editor = getPrefs().edit();
         editor.clear();
         editor.putStringSet(HISTORY, getHistorySet());

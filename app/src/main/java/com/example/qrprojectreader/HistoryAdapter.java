@@ -11,10 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
-public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHodler> {
+public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
 
     private ArrayList<String> historyList = new ArrayList<>();
-    private HistoryViewHodler holder;
+    private HistoryViewHolder holder;
     private Context context;
     private RowClick rowClick;
 
@@ -25,25 +25,18 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
     @NonNull
     @Override
-    public HistoryViewHodler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_row, parent, false);
-        HistoryViewHodler holder = new HistoryViewHodler(view, rowClick);
+        HistoryViewHolder holder = new HistoryViewHolder(view, rowClick);
         this.holder = holder;
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HistoryViewHodler holder, int position) {
-        String [] message = historyList.get(position).split(" ");
-        StringBuilder content = new StringBuilder();
-        if(message.length > 1) {
-            for (int i = 1; i < message.length; i++) {
-                content.append(message[i]).append(" ");
-            }
-        }
+    public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
         Drawable img =context.getResources().getDrawable(R.drawable.ic_accessible_black_24dp);
         holder.imageDesc.setImageDrawable(img);
-        holder.description.setText(content.toString());
+        holder.description.setText(historyList.get(position));
     }
 
     @Override
@@ -59,13 +52,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         }
     }
 
-    class HistoryViewHodler extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class HistoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView description;
         ImageView imageDesc;
         RowClick rowClick;
 
-        public HistoryViewHodler(@NonNull View itemView, RowClick rowClick) {
+        public HistoryViewHolder(@NonNull View itemView, RowClick rowClick) {
             super(itemView);
             description = itemView.findViewById(R.id.desc_text);
             imageDesc = itemView.findViewById(R.id.image_desc);

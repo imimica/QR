@@ -43,7 +43,7 @@ public class QRFragment extends Fragment implements ZXingScannerView.ResultHandl
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_qr_write, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_qr, container, false);
         bindView(rootView);
         this.view = rootView;
         setOnClickListener();
@@ -88,35 +88,21 @@ public class QRFragment extends Fragment implements ZXingScannerView.ResultHandl
             result = args.getString("result");
         }
     }
-
-    private StringBuilder connectString(String[] message) {
-        StringBuilder content = new StringBuilder();
-        if(message.length > 1) {
-            for (int i = 1; i<message.length; i++) {
-                content.append(message[i]).append(" ");
-            }
-        }else {
-            content = new StringBuilder(message[1]);
-        }
-        return content;
-    }
-
     @Override
     public void handleResult(Result rawResult) {
         if(rawResult.getText() != null) {
-            String[] resutlText = rawResult.getText().split(" ");
             scannerView.stopCamera();
-            ((QRWriteActivity) activity).addDataInSet(rawResult.getText());
-            if(resutlText[0].equals("Url")) {
-                startUrlFragment(connectString(resutlText).toString());
+            ((QRActivity) activity).addData(rawResult.getText());
+            if(rawResult.toString().startsWith("http") || rawResult.toString().startsWith("www")) {
+                startUrlFragment(rawResult.toString());
             }else {
-                presentActivity(connectString(resutlText).toString());
+                presentActivity(rawResult.toString());
             }
         }
     }
 
     private void presentActivity(String result) {
-        Intent intent = new Intent(activity, QRWriteActivity.class);
+        Intent intent = new Intent(activity, QRActivity.class);
 
         intent.putExtra("result", result);
         activity.startActivity(intent);
