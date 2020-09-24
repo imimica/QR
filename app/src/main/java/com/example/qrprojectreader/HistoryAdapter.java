@@ -34,8 +34,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
     @Override
     public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
-        Drawable img =context.getResources().getDrawable(R.drawable.ic_accessible_black_24dp);
-        holder.imageDesc.setImageDrawable(img);
+        //Drawable img =context.getResources().getDrawable(R.drawable.ic_accessible_black_24dp);
+        //holder.imageDesc.setImageDrawable(img);
         holder.description.setText(historyList.get(position));
     }
 
